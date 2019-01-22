@@ -9,6 +9,7 @@
 namespace App\Service\GeolocationApi;
 
 use Symfony\Component\Config\Definition\Exception\Exception;
+use App\Service\AbstractApiService;
 
 /**
  * Class IpApiService
@@ -55,7 +56,7 @@ class IpStackService extends AbstractApiService implements GeolocationApiInterfa
         $response = $this->callApi($url, null, $options);
         // Check APi reponse
         if(!$this->isSuccess($response)) {
-            throw new Exception('IpAPI returns error');
+            throw new Exception('IpStackAPI returns error');
         }
         return $response;
     }

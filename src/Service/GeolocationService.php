@@ -58,12 +58,13 @@ class GeolocationService {
     }
 
     /**
+     * Get and format geolocation datas by service
      * @param string $ipAddress
      * @param string|null $apiName
      * @return array
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getDatasFromAPI(string $ipAddress, $apiName) {
+    public function getDatasFromAPI(string $ipAddress, $apiName) :array {
         // Call Ipstack if call
         if($apiName === IpStackService::APINAME) {
             $apiResult = $this->ipStackService->getGeolocation($ipAddress);
@@ -73,5 +74,16 @@ class GeolocationService {
         // Call ipApi by default
         $apiResult = $this->ipApiService->getGeolocation($ipAddress);
         return $this->ipApiFormatterService->format($apiResult, $ipAddress);
+    }
+
+    /**
+     * Get geolocation datas for weather
+     * @param string $ipAddress
+     * @return \StdClass
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function getDatasForWeather(string $ipAddress) {
+        $apiResult = $this->ipApiService->getGeolocation($ipAddress);
+        return $this->ipApiFormatterService->formatForWeather($apiResult);
     }
 }

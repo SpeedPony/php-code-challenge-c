@@ -27,6 +27,21 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
+    common.validator:
+        class: App\Service\Validator\CommonValidator
+        arguments:
+            - '@validator'
+
+    geolocation.validator:
+        class: App\Service\Validator\GeolocationValidator
+        arguments:
+            - '@common.validator'
+
+    weather.validator:
+        class: App\Service\Validator\WeatherValidator
+        arguments:
+            - '@common.validator'
+
     geolocation.geolocation_service:
         class: App\Service\GeolocationService
         arguments:
@@ -49,7 +64,17 @@ services:
     geolocation.formatter.ip_stack_service:
         class: App\Service\GeolocationFormatter\IpStackFormatterService
 
-    geolocation.validator:
-        class: App\Service\Validator\GeolocationValidator
+    weather.weather_service:
+        class: App\Service\WeatherService
         arguments:
-            - '@validator'
+            - '@geolocation.geolocation_service'
+            - '@weather.openweathermap_service'
+            - '@weather.formatter.openweathermap_service'
+
+    weather.openweathermap_service:
+        class: App\Service\WeatherAPI\OpenWeatherMapApiService
+        arguments:
+            - '%env(OPENWEATHERMAP_KEY)%'
+
+    weather.formatter.openweathermap_service:
+        class: App\Service\WeatherFormatter\OpenWeatherMapFormatterService

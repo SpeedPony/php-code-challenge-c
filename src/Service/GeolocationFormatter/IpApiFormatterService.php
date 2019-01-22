@@ -17,6 +17,7 @@ use App\Service\GeolocationApi\IpApiService;
 class IpApiFormatterService extends AbstractFormatterService implements FormatterInterface {
 
     /**
+     * Format API specific data
      * @param string $json
      * @param string $ip_adress
      * @return array
@@ -28,6 +29,18 @@ class IpApiFormatterService extends AbstractFormatterService implements Formatte
         $return["geo"]["city"] = $datas["city"];
         $return["geo"]["region"] = $datas["regionName"];
         $return["geo"]["country"] = $datas["country"];
+        return $return;
+    }
+
+    /**
+     * Format datas for weather aî
+     * @param string $json
+     * @return array
+     */
+    public function formatForWeather(string $json) : array {
+        $datas = \GuzzleHttp\json_decode($json, true);
+        $return["cityName"] = $datas["city"];
+        $return["countryCode"] = $datas["countryCode"];
         return $return;
     }
 }

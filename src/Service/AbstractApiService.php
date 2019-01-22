@@ -6,7 +6,7 @@
  * Time: 16:37
  */
 
-namespace App\Service\GeolocationApi;
+namespace App\Service;
 use GuzzleHttp;
 use Symfony\Component\Config\Definition\Exception\Exception;
 

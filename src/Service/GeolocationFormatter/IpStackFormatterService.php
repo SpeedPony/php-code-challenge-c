@@ -18,6 +18,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 class IpStackFormatterService extends AbstractFormatterService implements FormatterInterface {
 
     /**
+     * Format API specific data
      * @param string $json
      * @param string $ip_adress
      * @return array

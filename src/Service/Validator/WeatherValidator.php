@@ -9,10 +9,10 @@
 namespace App\Service\Validator;
 
 /**
- * Class GeolocationValidator
+ * Class WeatherValidator
  * @package App\Service\Validator
  */
-class GeolocationValidator {
+class WeatherValidator {
 
     /**
      * @var CommonValidator
@@ -30,10 +30,9 @@ class GeolocationValidator {
     /**
      * Validate datas
      * @param string $ip
-     * @param string|null $serviceName
      * @return bool
      */
-    public function validateGeolocation(string $ip, $serviceName) :bool {
-        return $this->commonValidator->validateIp($ip) && $this->commonValidator->validateService($serviceName);
+    public function validateGeolocation(string $ip) :bool {
+        return $this->commonValidator->validateIp($ip);
     }
 }

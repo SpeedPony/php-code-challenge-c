@@ -9,6 +9,7 @@
 namespace App\Service\GeolocationApi;
 
 use Symfony\Component\Config\Definition\Exception\Exception;
+use App\Service\AbstractApiService;
 
 /**
  * Class IpApiService
@@ -26,7 +27,7 @@ class IpApiService extends AbstractApiService implements GeolocationApiInterface
     /**
      * @var array
      */
-    private $queryFields = array("status", "city", "regionName", "country");
+    private $queryFields = array("status", "city", "regionName", "country", "countryCode");
 
     /**
      * Prepare, execute and check API request
