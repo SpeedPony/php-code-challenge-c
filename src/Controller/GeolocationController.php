@@ -38,6 +38,7 @@ class GeolocationController extends AbstractController {
      * @return JsonResponse
      */
     public function geolocationWithIP(Request $request, $ip_address) {
+
         $apiService = $request->get('service');
         // Validate input
         if(!$this->get('geolocation.validator')->validateGeolocation($ip_address, $apiService)) {
@@ -52,6 +53,8 @@ class GeolocationController extends AbstractController {
             return new JsonResponse($geolocationDatas);
         }
         catch(\Exception $e) {
+            $logger = $this->get('logger.music');
+            $logger->err($e->getMessage());
             throw new NotFoundHttpException('An error occurred');
         }
     }

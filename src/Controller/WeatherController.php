@@ -51,7 +51,8 @@ class WeatherController extends AbstractController {
             return new JsonResponse($weatherDatas);
         }
         catch(\Exception $e) {
-            var_dump($e->getMessage()); die();
+            $logger = $this->get('logger.music');
+            $logger->err($e->getMessage());
             throw new NotFoundHttpException('An error occurred');
         }
     }

@@ -16,8 +16,8 @@ abstract class AbstractFormatterService {
 
     /**
      * Format common datas
-     * @param $serviceName
-     * @param $ip_adress
+     * @param string $serviceName
+     * @param string $ip_adress
      * @return array
      */
     public function commonFormat(string $serviceName, string $ip_adress) : array {

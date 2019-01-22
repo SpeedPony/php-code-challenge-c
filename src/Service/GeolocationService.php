@@ -79,7 +79,7 @@ class GeolocationService {
     /**
      * Get geolocation datas for weather
      * @param string $ipAddress
-     * @return \StdClass
+     * @return array
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getDatasForWeather(string $ipAddress) {
