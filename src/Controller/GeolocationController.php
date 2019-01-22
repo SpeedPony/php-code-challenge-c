@@ -11,6 +11,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -39,13 +40,19 @@ class GeolocationController extends AbstractController {
     public function geolocationWithIP(Request $request, $ip_address) {
         $apiService = $request->get('service');
         // Validate input
-        // @TODO
+        if(!$this->get('geolocation.validator')->validateGeolocation($ip_address, $apiService)) {
+            throw new NotFoundHttpException('Incorrect inputs');
+        }
 
         // Call API
-        // @TODO Handle exception
-        $geolocationDatas = $this->get('geolocation.geolocation_service')->getDatasFromAPI($ip_address, $apiService);
+        try {
+            $geolocationDatas = $this->get('geolocation.geolocation_service')->getDatasFromAPI($ip_address, $apiService);
 
-        // Return Json response
-        return new JsonResponse($geolocationDatas);
+            // Return Json response
+            return new JsonResponse($geolocationDatas);
+        }
+        catch(\Exception $e) {
+            throw new NotFoundHttpException('An error occurred');
+        }
     }
 }

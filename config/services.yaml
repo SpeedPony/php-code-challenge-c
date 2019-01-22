@@ -48,3 +48,8 @@ services:
 
     geolocation.formatter.ip_stack_service:
         class: App\Service\GeolocationFormatter\IpStackFormatterService
+
+    geolocation.validator:
+        class: App\Service\Validator\GeolocationValidator
+        arguments:
+            - '@validator'
